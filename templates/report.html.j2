@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><title>Report {{ product.product_id }}</title>
+<style>body{font-family:system-ui;margin:24px} .pill{display:inline-block;padding:4px 8px;border-radius:999px;border:1px solid #ccc;margin-right:6px}</style>
+</head>
+<body>
+  <h1>{{ product.name }}（{{ product.product_id }}）</h1>
+  <p>Brand：{{ product.brand }} ｜ category：{{ product.category }}</p>
+  <h2>Overall score：{{ scores.total }} / 100</h2>
+  <p>Authority: {{ scores.A }} ｜ Consumer: {{ scores.C }}</p>
+  <h3>Risk Flag</h3>
+  {% if flags %}{% for f in flags %}<span class="pill">{{ f }}</span>{% endfor %}
+  {% else %}<span class="pill">NONE</span>{% endif %}
+  <h3>Rating breakdown</h3>
+  <ul>
+    {% for line in breakdown %}<li>{{ line }}</li>{% endfor %}
+  </ul>
+  <h3>Official Source</h3>
+  {% if authority.notice_url %}<p><a href="{{ authority.notice_url }}">{{ authority.notice_url }}</a></p>{% else %}<p>no</p>{% endif %}
+  <h3>Recent Comments</h3>
+  <ul>
+    {% for r in recent_reviews %}
+      <li>{{ r.review_date }} ★{{ r.rating }} ｜ rep={{ r.reviewer_reputation }} ｜ <a href="{{ r.evidence_url }}">{{ r.evidence_url }}</a></li>
+    {% endfor %}
+  </ul>
+</body>
+</html>

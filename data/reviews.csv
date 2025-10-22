@@ -1,0 +1,4 @@
+product_id,source_type,rating,review_date,evidence_url,reviewer_reputation
+CN-MED-0004,consumer,2,2025-07-10,https://shop.example/rev/1,0.7
+CN-MED-0004,consumer,1,2025-06-02,https://shop.example/rev/2,0.6
+CN-ELC-0003,consumer,5,2025-05-20,https://shop.example/rev/3,0.8
