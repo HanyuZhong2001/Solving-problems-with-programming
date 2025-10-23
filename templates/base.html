@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>{{ title or "TrustCheck" }}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="{{ url_for('static', filename='styles.css') }}" rel="stylesheet">
+</head>
+<body>
+  <main role="main" aria-live="polite">
+    <header class="site-header">
+      <h1 class="brand">TrustCheck</h1>
+    </header>
+    <section class="container">
+      {% block content %}{% endblock %}
+    </section>
+  </main>
+  <footer class="site-footer" aria-label="footer">
+    <p>Educational MVP · Evidence aggregation & explainable scoring</p>
+  </footer>
+  <script>
+    function toggleHelp() {
+      const el = document.getElementById('id-help');
+      if (!el) return;
+      el.hidden = !el.hidden;
+      if (!el.hidden) el.focus();
+    }
+  </script>
+</body>
+</html>
