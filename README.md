@@ -57,7 +57,7 @@
 ---
 
 ## 6) Planned Software Architecture 
-![Architecture](./archtecture.png)
+![Architecture](./architecture.png)
 
 **A. Interfaces (elder-friendly, HTML)**
 - **Public Web Pages:**  
