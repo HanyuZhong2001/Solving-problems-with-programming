@@ -1,31 +1,45 @@
 {% extends "base.html" %}
 {% block content %}
-<h2 class="title">Check Product Risk</h2>
-<p class="subtitle">Enter a product ID to generate a one-page risk report.</p>
+<div class="center-box">
+  <h2 class="title">Check Product Risk</h2>
+  <p class="subtitle">Enter a product ID to generate a one-page risk report.</p>
 
-<form method="post" class="card" aria-label="product id form">
-  <label for="product_id" class="label">Product ID</label>
-  <input id="product_id" name="product_id" type="text" class="input" 
-         placeholder="e.g., CN-MED-0004" aria-required="true" autofocus>
-  <div class="actions">
-    <button type="submit" class="btn btn-primary" aria-label="Submit to generate report">Submit</button>
-    <button type="button" class="btn btn-ghost" onclick="toggleHelp()" aria-expanded="false" aria-controls="id-help">
-      No ID found?
-    </button>
-  </div>
-  {% if message %}
-    <div class="notice" role="status">{{ message }}</div>
-  {% endif %}
-  <div id="id-help" class="help" hidden tabindex="-1" aria-live="assertive">
-    <h3>Where to find the product ID?</h3>
-    <ul>
-      <li>On the package/label: look for model code, registration or filing number.</li>
-      <li>On the invoice or product page online.</li>
-      <li>If no standardized ID is provided, treat it with caution — regulated
-          medical/health products usually have an identifier.
-          This tool is for educational purposes.</li>
-    </ul>
-    <p class="warn">Warning: absence of an ID may indicate the product is not properly registered or traceable.</p>
-  </div>
-</form>
+  <form method="post" class="card" aria-label="product id form" autocomplete="off">
+    <label for="product_id" class="label">Product ID</label>
+    <input id="product_id" name="product_id" type="text" class="input"
+           placeholder="e.g., CN-MED-0004" aria-required="true" autofocus>
+    <div class="actions">
+      <button type="submit" class="btn btn-primary">Submit</button>
+      <button type="button" class="btn btn-ghost" onclick="toggleHelp()">No ID found?</button>
+    </div>
+
+    {% if message %}
+      <div class="notice" role="status">{{ message }}</div>
+    {% endif %}
+
+    <div id="id-help" class="help" hidden tabindex="-1">
+      <h3>Where to find the product ID?</h3>
+      <ul>
+        <li>On the package/label: look for model code, registration or filing number.</li>
+        <li>On the invoice or product page online.</li>
+        <li>If no standardized ID is provided, treat it with caution — regulated
+            medical/health products usually have an identifier.</li>
+      </ul>
+      <div class="barcode-section">
+        <img src="{{ url_for('static', filename='barcode-overview.png') }}"
+          alt="Example of barcode location" class="barcode-img">
+        <p class="barcode-caption">
+          Example: barcodes are usually printed on the side or back of the package.
+        </p>
+      </div>
+
+      <div class="warn-box" role="alert">
+        <span class="warn-icon">⚠️</span>
+        <p class="warn-text">
+          Warning: absence of an ID may indicate the product is not properly registered or traceable.
+        </p>
+      </div>
+    </div>
+  </form>
+</div>
 {% endblock %}

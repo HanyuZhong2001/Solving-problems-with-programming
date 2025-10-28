@@ -1,14 +1,27 @@
 {% extends "base.html" %}
 {% block content %}
-<a class="back" href="{{ url_for('index') }}" aria-label="Back to input">← Back</a>
-<h2 class="title">Report: {{ product.name }} ({{ product.product_id }})</h2>
-<p class="meta">Brand: {{ product.brand }} · Category: {{ product.category }}</p>
+<div class="center-box">
+  <a class="back" href="{{ url_for('index') }}">← Back</a>
+  <h2 class="title">Report: {{ product.name }} ({{ product.product_id }})</h2>
+  <p class="meta">Brand: {{ product.brand }} · Category: {{ product.category }}</p>
 
-<div class="grid">
   <section class="card">
-    <h3>Scores</h3>
-    <p class="score">Total: <strong>{{ scores.T }}</strong> / 100</p>
-    <p>Authority: {{ scores.A }} · Consumer: {{ scores.C }}</p>
+    <h3>Overall Score</h3>
+    {% set score = scores.T %}
+    <div class="score-box
+         {% if score < 40 %}score-red
+         {% elif score < 70 %}score-yellow
+         {% else %}score-green{% endif %}">
+      <p class="score-value">{{ scores.T }}</p>
+      {% if score < 40 %}
+        <p class="score-text">⚠ Not recommended to buy</p>
+      {% elif score < 70 %}
+        <p class="score-text">⚠ Use caution, mixed reliability</p>
+      {% else %}
+        <p class="score-text">✅ Recommended to buy</p>
+      {% endif %}
+    </div>
+
     <h4>Breakdown</h4>
     <ul>
       {% for line in breakdown %}
@@ -29,7 +42,7 @@
 
     <h3>Authority Notice</h3>
     {% if authority and authority.notice_url %}
-      <p><a href="{{ authority.notice_url }}" target="_blank" rel="noopener">Open notice</a></p>
+      <p><a href="{{ authority.notice_url }}" target="_blank">Open notice</a></p>
     {% else %}
       <p>None</p>
     {% endif %}
@@ -40,8 +53,8 @@
     {% if recent_reviews %}
       <ul>
         {% for r in recent_reviews %}
-          <li>{{ r.review_date.date() if r.review_date else "" }} · ★{{ r.rating }} · rep={{ r.reviewer_reputation }} · 
-            {% if r.evidence_url %}<a href="{{ r.evidence_url }}" target="_blank" rel="noopener">evidence</a>{% endif %}
+          <li>{{ r.review_date.date() if r.review_date else "" }} · ★{{ r.rating }} · rep={{ r.reviewer_reputation }} ·
+            {% if r.evidence_url %}<a href="{{ r.evidence_url }}" target="_blank">evidence</a>{% endif %}
           </li>
         {% endfor %}
       </ul>
