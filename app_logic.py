@@ -4,7 +4,7 @@ import math
 import pandas as pd
 
 DATA = Path(__file__).parent / "data"
-ELDERLY_SENSITIVE = {"保健品","理疗仪","理疗贴","保健器械"}
+ELDERLY_SENSITIVE = {"Health products, physiotherapy devices, physiotherapy patches, health care equipment"}
 
 def time_decay(days):
     return math.exp(-max(days,0)/365.0)
@@ -60,5 +60,5 @@ def find_product(prods: pd.DataFrame, query: str):
     q = str(query).strip().lower()
     mask = (
         prods["product_id"].astype(str).str.lower() == q
-    )  # 为了简洁：这里做“精确ID匹配”（大小写不敏感）
+    )
     return prods[mask].copy()

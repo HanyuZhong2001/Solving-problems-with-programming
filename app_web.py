@@ -4,7 +4,7 @@ import pandas as pd
 from app_logic import load_data, find_product, authority_score, consumer_score, combined_score, risk_flags
 
 app = Flask(__name__)
-prods, auth, revs = load_data()  # 简单做法：内存加载
+prods, auth, revs = load_data()
 
 @app.route("/", methods=["GET", "POST"])
 def index():
@@ -18,7 +18,6 @@ def index():
         if found.empty:
             message = "No product found for this ID."
             return render_template("index.html", message=message)
-        # 取第一个匹配
         p = found.iloc[0].to_dict()
         a_row_df = auth[auth["product_id"] == p["product_id"]]
         a_row = a_row_df.iloc[0].to_dict() if not a_row_df.empty else {}
