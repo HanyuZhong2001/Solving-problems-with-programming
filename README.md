@@ -148,7 +148,9 @@ python app_web.py
 - fully automated ingestion & scoring, minimal manual maintenance.
 - Explore commercial sustainability, sponsorship or subscription model.
 
-## 11)Project Directory
+## 11) Project Directory
+
+```text
 .
 ├─ app_web.py                 # Web UI / API server
 ├─ app_logic.py               # Core logic (scoring & aggregation)
@@ -158,7 +160,7 @@ python app_web.py
 │   └─ report.html             # one-page result report (color coded)
 ├─ static/
 │   ├─ styles.css              # elder-friendly large fonts + high contrast + color blocks
-│   └─ barcode-overview.png     # image for “where to find ID?”
+│   └─ barcode-overview.png    # image for “where to find ID?”
 ├─ data/
 │   ├─ products.csv
 │   ├─ authorities.csv
@@ -167,4 +169,5 @@ python app_web.py
 ├─ docs/                      # (future) architecture diagrams etc.
 ├─ requirements.txt
 └─ README.md
+
 
